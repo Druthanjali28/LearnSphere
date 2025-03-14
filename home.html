@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - LearnSphere</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <h1>LearnSphere</h1>
+      <nav>
+        <ul>
+          <li><a href="login.html" class="btn white">Get started</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="overlay">
+      <div class="hero-content">
+        <h3>Best Online Courses</h3>
+        <h1>The Best Online Learning Platform</h1>
+        <p>Online education has transformed the way people acquire knowledge, making learning more accessible, flexible, and convenient. With the rise of digital platforms, students can now access quality education from anywhere in the worsld.</p>
+        <div class="hero-buttons">
+          <a href="#read-more" class="btn blue">Read More</a>
+          <a href="#join-now" class="btn white">Join Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Image Section -->
+  <!--<section class="additional-image">
+    <img src="images/extra/b1.jpg" alt="Additional Image" class="additional-img">
+  </section>-->
+
+  <script>
+    // Array of background image URLs
+    const backgroundImages = [
+      'home.jpg', 
+      'images/extra/b1.jpg', 
+      'images/extra/b2.jpg', 
+      'images/extra/b3.jpg',
+      'images/extra/b4.jpg'
+    ];
+    let currentImageIndex = 0;
+
+    // Function to change background image
+    function changeBackgroundImage() {
+      const heroSection = document.querySelector('.hero');
+      currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;  // Loop through images
+      heroSection.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+    }
+
+    // Change background every  2 seconds
+    setInterval(changeBackgroundImage, 2000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LearnSphere</title>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'bold', sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background: linear-gradient(90deg, #06BBCC, #08A0B2);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links li {
+      margin: 0 10px;
+    }
+
+    .nav-links a {
+      padding: 8px 12px;
+      color: white;
+      font-weight: 500;
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .profile-container {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .profile-container img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: transform 0.2s ease;
+    }
+
+    .profile-container img:hover {
+      transform: scale(1.1);
+    }
+
+    /* Dropdown Styles */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 50px;
+      background: white;
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      color: #333;
+      font-size: 14px;
+      text-align: left;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f8f9fa;
+    }
+
+    .profile-container:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* Hero Section Styles */
+   /* Hero Section Styles */
+.hero {
+  background: url('b4.jpg') no-repeat center center/cover;
+  height: 100vh; /* Make the height take up the full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 0; /* Remove padding to ensure full coverage */
+  background-size: cover; /* Ensure the image fully covers the section */
+  background-position: center center; /* Center the image */
+}
+
+
+    .hero-content h3 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #00c6ff;
+      margin-bottom: 10px;
+    }
+
+    .hero-content h1 {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: #007bff;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0056b3;
+    }
+
+    .btn-secondary {
+      background: #00c6ff;
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">LearnSphere</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="discussion_form.php">Discussion</a></li>
+          <li><a href="logout.html">Logout</a></li>
+          <li>
+            <div class="profile-container">
+              <img src="default.png" alt="Profile">
+              <div class="dropdown-menu">
+                <a href="profile.php">View Profile</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h3>BEST ONLINE COURSES</h3>
+      <h1>The Best Online Learning Platform</h1>
+      <p>Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea sanctus eirmod elitr.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-secondary">Join Now</a>
+      </div>
+    </div>
+  </section>
+  <!--<section class="additional-image">
+    <img src="images/extra/b1.jpg" alt="Additional Image" class="additional-img">
+  </section>-->
+  <script>
+    // Array of background image URLs
+    const backgroundImages = [
+      'home.jpg', 
+      'images/extra/b1.jpg', 
+      'images/extra/b4.jpg', 
+      'images/extra/b3.jpg',
+      'images/extra/b4.jpg'
+    ];
+    let currentImageIndex = 0;
+
+    // Function to change background image
+    function changeBackgroundImage() {
+      const heroSection = document.querySelector('.hero');
+      currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;  // Loop through images
+      heroSection.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+    }
+
+    // Change background every  7 seconds
+    setInterval(changeBackgroundImage, 2000);
+  </script>
+</body>
+</html>

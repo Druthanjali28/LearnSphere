@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #141E30, #243B55);
+            color: white;
+            padding: 20px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #quiz-container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        .btn {
+            display: block;
+            padding: 12px;
+            margin: 8px auto;
+            background: #06BBCC;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 90%;
+            max-width: 300px;
+            font-size: 1.2em;
+            transition: 0.3s ease;
+        }
+        .btn:hover {
+            background: #048B99;
+            transform: scale(1.05);
+        }
+        #next-btn {
+            margin-top: 20px;
+            padding: 12px;
+            background: green;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Select a Programming Language</h2>
+    <div id="languages">
+        <button class="btn" onclick="selectLanguage('Python')">Python</button>
+        <button class="btn" onclick="selectLanguage('JavaScript')">JavaScript</button>
+        <button class="btn" onclick="selectLanguage('C++')">C++</button>
+        <button class="btn" onclick="selectLanguage('Java')">Java</button>
+        <button class="btn" onclick="selectLanguage('C#')">C#</button>
+        <button class="btn" onclick="selectLanguage('PHP')">PHP</button>
+        <button class="btn" onclick="selectLanguage('Ruby')">Ruby</button>
+        <button class="btn" onclick="selectLanguage('Swift')">Swift</button>
+        <button class="btn" onclick="selectLanguage('Go')">Go</button>
+        <button class="btn" onclick="selectLanguage('Kotlin')">Kotlin</button>
+        <button class="btn" onclick="selectLanguage('TypeScript')">TypeScript</button>
+        <button class="btn" onclick="selectLanguage('Rust')">Rust</button>
+    </div>
+
+    <div id="quiz-container" style="display: none;">
+        <h2 id="question">Loading question...</h2>
+        <div id="options"></div>
+        <button id="next-btn" class="btn" onclick="nextQuestion()" disabled>Next Question</button>
+        <p id="score">Score: 0</p>
+    </div>
+
+    <script>
+        let selectedLanguage = "";
+        let currentIndex = 0;
+        let score = 0;
+        let quizData = {};
+
+        const questions = {
+            "Python": [
+                { question: "What is Python?", options: ["A snake", "A programming language", "A car", "A game"], answer: "A programming language" },
+                { question: "Who developed Python?", options: ["James Gosling", "Dennis Ritchie", "Guido van Rossum", "Bjarne Stroustrup"], answer: "Guido van Rossum" }
+            ],
+            "JavaScript": [
+                { question: "Which keyword declares a variable in JavaScript?", options: ["var", "define", "int", "declare"], answer: "var" },
+                { question: "What is the output of `typeof null`?", options: ["object", "null", "undefined", "string"], answer: "object" }
+            ]
+        };
+
+        function selectLanguage(language) {
+            selectedLanguage = language;
+            quizData = questions[selectedLanguage];
+            currentIndex = 0;
+            score = 0;
+            document.getElementById("languages").style.display = "none";
+            document.getElementById("quiz-container").style.display = "block";
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            let currentQuestion = quizData[currentIndex];
+            document.getElementById("question").innerText = currentQuestion.question;
+            document.getElementById("options").innerHTML = currentQuestion.options.map(option =>
+                `<button class="btn" onclick="checkAnswer(this, '${option}')">${option}</button>`
+            ).join('');
+            document.getElementById("next-btn").disabled = true;
+        }
+
+        function checkAnswer(button, answer) {
+            let correctAnswer = quizData[currentIndex].answer;
+            if (answer === correctAnswer) {
+                button.style.background = "green";
+                score++;
+            } else {
+                button.style.background = "red";
+            }
+            document.getElementById("score").innerText = `Score: ${score}`;
+            document.getElementById("next-btn").disabled = false;
+        }
+
+        function nextQuestion() {
+            currentIndex = (currentIndex + 1) % quizData.length;
+            loadQuestion();
+        }
+    </script>
+</body>
+</html>

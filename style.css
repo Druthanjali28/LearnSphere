@@ -1,0 +1,116 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #06BBCC;
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 10px;
+}
+
+.nav-links a {
+    padding: 8px 12px;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Courses Section Styles */
+.courses {
+    padding: 40px 20px;
+}
+
+.course-category {
+    margin-bottom: 40px;
+}
+
+.levels {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.level {
+    flex: 1;
+    margin: 20px;
+}
+
+.sublevels {
+    margin-top: 20px;
+}
+
+.sublevel {
+    margin-bottom: 20px;
+}
+
+.sublevel h4 {
+    margin-bottom: 10px;
+}
+
+.sublevel ul {
+    padding-left: 20px;
+}
+
+.sublevel ul li {
+    margin-bottom: 10px;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #06BBCC;
+    color: white;
+    font-size: 14px;
+}

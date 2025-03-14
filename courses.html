@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Levels Navigation</title>
+  <style>
+    /* General Styles */
+   /* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url('images/b.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+}
+
+/* Sections */
+.section {
+  display: none;
+  min-height: 100vh;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.section.active {
+  display: block;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Buttons */
+.navigate-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(45deg, #06bbcc, #06bbcc);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.navigate-btn:hover {
+  background: linear-gradient(45deg, #090a0a, #bdcecf);
+  transform: translateY(-2px);
+}
+
+/* Courses Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.course-item {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  text-align: center;
+  padding: 50px 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.course-item:hover {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+/* Difficulty Levels */
+.levels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.level-item {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  text-align: center;
+  padding: 40px 0;
+  font-size: 1.3em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+.level-item:hover {
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+/* Link List */
+.link-list {
+  padding: 20px;
+  text-align: left;
+  max-width: 800px;
+  margin: auto;
+}
+
+.link-list a {
+  display: block;
+  padding: 12px;
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  color: white;
+  text-decoration: none;
+  margin: 10px 0;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+.link-list a:hover {
+  background: linear-gradient(45deg, #0056b3, #00408a);
+  transform: translateX(5px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Page 1: Courses Grid -->
+  <div class="section active" id="page-1">
+    <h1>Courses Grid</h1>
+    <div class="courses-grid">
+      <div class="course-item" onclick="showSection('html-levels')">HTML</div>
+      <div class="course-item" onclick="showSection('css-levels')">CSS</div>
+      <div class="course-item" onclick="showSection('react-levels')">React</div>
+      <div class="course-item" onclick="showSection('java-levels')">Java</div>
+      <div class="course-item" onclick="showSection('php-levels')">PHP</div>
+      <div class="course-item" onclick="showSection('python-levels')">Python</div>
+      <div class="course-item" onclick="showSection('sql-levels')">SQL</div>
+      <div class="course-item" onclick="showSection('nextjs-levels')">Next.js</div>
+      <div class="course-item" onclick="showSection('mongodb-levels')">MongoDB</div>
+      <div class="course-item" onclick="showSection('c-levels')">C</div>
+      <div class="course-item" onclick="showSection('dsa-levels')">DSA</div>
+      <div class="course-item" onclick="showSection('javascript-levels')">Javascript</div>
+    </div>
+  </div>
+
+  <!-- Levels Pages -->
+  <!-- HTML Levels -->
+  <div class="section" id="html-levels">
+    <h1>HTML: Select a Level</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('html-easy')">Easy</div>
+      <div class="level-item" onclick="showSection('html-intermediate')">Intermediate</div>
+      <div class="level-item" onclick="showSection('html-hard')">Hard</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+  </div>
+
+  <!-- HTML Easy -->
+  <div class="section" id="html-easy">
+    <h1>HTML Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('html-easy-mini-videos')">Mini Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('html-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="html-easy-mini-videos">
+    <h1>HTML Easy Mini Videos</h1>
+    <div class="link-list" id="video-list">
+      <div class="video-item" data-id="1">
+        <a href="https://www.youtube.com/watch?v=8JQaedsB2qI">Beginner Mini Video 1</a>
+        <button onclick="increaseCount(1)">Satisfied</button>
+        <span id="count-1">0</span>
+      </div>
+      <div class="video-item" data-id="2">
+        <a href="https://www.youtube.com/watch?v=hkAuy2dVJsw">Beginner Mini Video 2</a>
+        <button onclick="increaseCount(2)">Satisfied</button>
+        <span id="count-2">0</span>
+      </div>
+      <div class="video-item" data-id="3">
+        <a href="https://www.youtube.com/watch?v=5gVxlxwBcCU&list=PLG6ePePp5vvYI1n1aFlELPfh9sfGcIHal">Beginner Mini Video 3</a>
+        <button onclick="increaseCount(3)">Satisfied</button>
+        <span id="count-3">0</span>
+      </div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('html-easy')">Go Back</button>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Load counts from localStorage
+      const counts = JSON.parse(localStorage.getItem('videoCounts')) || { 1: 0, 2: 0, 3: 0 };
+      Object.keys(counts).forEach(id => {
+        document.getElementById(`count-${id}`).innerText = counts[id];
+      });
+      sortVideos(counts);
+    });
+  
+    function increaseCount(id) {
+      const counts = JSON.parse(localStorage.getItem('videoCounts')) || { 1: 0, 2: 0, 3: 0 };
+      counts[id]++;
+      document.getElementById(`count-${id}`).innerText = counts[id];
+      localStorage.setItem('videoCounts', JSON.stringify(counts));
+      sortVideos(counts);
+    }
+  
+    function sortVideos(counts) {
+      const videoList = document.getElementById('video-list');
+      const videos = Array.from(videoList.getElementsByClassName('video-item'));
+      
+      videos.sort((a, b) => {
+        const idA = a.getAttribute('data-id');
+        const idB = b.getAttribute('data-id');
+        return counts[idB] - counts[idA];
+      });
+  
+      videos.forEach(video => videoList.appendChild(video)); // Reorder DOM
+    }
+  </script>
+  
+<div class="section" id="html-intermediate">
+    <h1>HTML Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('html-intermediate-videos')">Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('html-levels')">Go Back</button>
+  </div>
+  <div class="section" id="html-intermediate-videos">
+    <h1>HTML Intermediate Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=SDFX_a_Tf7o&list=PLhHaibdHQVE3FS83XsR-wUX-VqicTtifV">Beginner Video 1</a>
+      <a href="https://www.youtube.com/watch?v=hvsC6Q8-ne4&list=PLhHaibdHQVE3FS83XsR-wUX-VqicTtifV&index=2">Beginner Video 2</a>
+      <a href="https://www.youtube.com/watch?v=xUtj42ck8vs&list=PLhHaibdHQVE3FS83XsR-wUX-VqicTtifV&index=3">Beginner Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('html-intermediate')">Go Back</button>
+  </div>
+  <div class="section" id="html-hard">
+    <h1>HTML Hard</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('html-hard-courses')">Courses</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('html-levels')">Go Back</button>
+  </div>
+  <div class="section" id="html-hard-courses">
+    <h1>HTML Easy Courses</h1>
+    <div class="link-list">
+      <a href="https://www.geeksforgeeks.org/learn-html/">Beginner Course 1</a>
+      <a href="https://www.w3schools.com/html/">Beginner Course 2</a>
+      <a href="https://www.youtube.com/watch?v=mJgBOIoGihA">Beginner Course 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('html-hard')">Go Back</button>
+</div>
+<div class="section" id="css-levels">
+    <h1>CSS: Select a Level</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('css-easy')">Easy</div>
+      <div class="level-item" onclick="showSection('css-intermediate')">Intermediate</div>
+      <div class="level-item" onclick="showSection('css-hard')">Hard</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+  </div>
+
+  <!-- HTML Easy -->
+  <div class="section" id="css-easy">
+    <h1>CSS Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('css-easy-mini-videos')">Mini Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('css-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="css-easy-mini-videos">
+    <h1>CSS Easy Mini Videos</h1>
+    <div class="link-list">
+      <a href="https://www.freecodecamp.org/news/get-started-with-css-in-5-minutes-e0804813fc3e/?utm_source=chatgpt.com">Beginner Mini Video 1</a>
+      <a href="https://www.youtube.com/watch?v=Z4pCqK-V_Wo&t=53s">Beginner Mini Video 2</a>
+      <a href="https://www.youtube.com/watch?v=0afZj1G0BIE">Beginner Mini Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('css-easy')">Go Back</button>
+  </div>
+<div class="section" id="css-intermediate">
+    <h1>CSS Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('css-intermediate-videos')">Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('css-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="css-intermediate-videos">
+    <h1>CSS Intermediate Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=wRNinF7YQqQ">Beginner Video 1</a>
+      <a href="https://www.youtube.com/watch?v=1PnVor36_40">Beginner Video 2</a>
+      <a href="https://www.youtube.com/watch?v=u_GIT5MJAtc">Beginner Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('css-intermediate')">Go Back</button>
+  </div>
+  
+
+  <!-- HTML Hard -->
+  <div class="section" id="css-hard">
+    <h1>CSS Hard</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('css-hard-courses')">Courses</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('css-levels')">Go Back</button>
+  </div>
+  <div class="section" id="css-hard-courses">
+    <h1>CSS Easy Courses</h1>
+    <div class="link-list">
+      <a href="https://www.freecodecamp.org/learn/responsive-web-design/basic-html-and-html5/">Beginner Course 1</a>
+      <a href="https://www.youtube.com/watch?v=OXGznpKZ_sA">Beginner Course 2</a>
+      <a href="https://www.youtube.com/watch?v=n4R2E7O-Ngo">Beginner Course 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('css-hard')">Go Back</button>
+</div>
+<div class="section" id="react-levels">
+    <h1>React: Select a Level</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('react-easy')">Easy</div>
+      <div class="level-item" onclick="showSection('react-intermediate')">Intermediate</div>
+      <div class="level-item" onclick="showSection('react-hard')">Hard</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+  </div>
+
+  <!-- HTML Easy -->
+  <div class="section" id="react-easy">
+    <h1>React Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('react-easy-mini-videos')">Mini Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('react-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="react-easy-mini-videos">
+    <h1>React Easy Mini Videos</h1>
+    <div class="link-list">
+      <a href="https://www.freecodecamp.org/news/learn-react-basics-in-10-minutes">Beginner Mini Video 1</a>
+      <a href="https://www.youtube.com/watch?v=s2skans2dP4">Beginner Mini Video 2</a>
+      <a href="https://www.youtube.com/watch?v=O6P86uwfdR0">Beginner Mini Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('react-easy')">Go Back</button>
+  </div>
+<div class="section" id="react-intermediate">
+    <h1>CSS Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('react-intermediate-videos')">Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('react-levels')">Go Back</button>
+  </div>
+  <div class="section" id="react-intermediate-videos">
+    <h1>React Intermediate Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=U2Wltnv-doo&list=PLpPqplz6dKxW5ZfERUPoYTtNUNvrEebAR">Beginner Video 1</a>
+      <a href="https://www.youtube.com/watch?v=E8lXC2mR6-k">Beginner Video 2</a>
+      <a href="https://www.youtube.com/watch?v=hn80mWvP-9g">Beginner Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('react-intermediate')">Go Back</button>
+  </div>
+
+  
+
+  <!-- HTML Hard -->
+  <div class="section" id="react-hard">
+    <h1>React Hard</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('react-hard-courses')">Courses</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('react-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="react-hard-courses">
+    <h1>React Easy Courses</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=RVFAyFWO4go">Beginner Course 1</a>
+      <a href="https://www.w3schools.com/REACT/DEFAULT.ASP">Beginner Course 2</a>
+      <a href="https://www.youtube.com/watch?v=f55qeKGgB_M">Beginner Course 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('react-hard')">Go Back</button>
+</div>
+<div class="section" id="java-levels">
+    <h1>Java: Select a Level</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('java-easy')">Easy</div>
+      <div class="level-item" onclick="showSection('java-intermediate')">Intermediate</div>
+      <div class="level-item" onclick="showSection('java-hard')">Hard</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+  </div>
+
+  <!-- HTML Easy -->
+  <div class="section" id="java-easy">
+    <h1>Java Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('java-easy-mini-videos')">Mini Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('java-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="java-easy-mini-videos">
+    <h1>Java Easy Mini Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=bm0OyhwFDuY&list=PLsyeobzWxl7pe_IiTfNyr55kwJPWbgxB5">Beginner Mini Video 1</a>
+      <a href="https://www.youtube.com/watch?v=SslMi6ptwH8&list=PL9ooVrP1hQOFR25JoQW3h3n5pBs77e6KU&index=18">Beginner Mini Video 2</a>
+      <a href="https://www.youtube.com/watch?v=5X0Y--92pMI&list=PL9ooVrP1hQOFR25JoQW3h3n5pBs77e6KU&index=11">Beginner Mini Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('java-easy')">Go Back</button>
+  </div>
+<div class="section" id="java-intermediate">
+    <h1>Java Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('java-intermediate-videos')">Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('java-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="java-intermediate-videos">
+    <h1>Java Intermediate Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=vJ-Zn4fo0MQ">Beginner Video 1</a>
+      <a href="https://www.youtube.com/watch?v=ewiOaDitBBw">Beginner Video 2</a>
+      <a href="https://www.youtube.com/watch?v=7GwptabrYyk&list=PL9ooVrP1hQOFR25JoQW3h3n5pBs77e6KU&index=10">Beginner Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('java-intermediate')">Go Back</button>
+  </div>
+  
+
+  <!-- HTML Hard -->
+  <div class="section" id="java-hard">
+    <h1>Java Hard</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('java-hard-courses')">Courses</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('java-levels')">Go Back</button>
+  </div>
+  <div class="section" id="java-hard-courses">
+    <h1>Java Easy Courses</h1>
+    <div class="link-list">
+      <a href="https://www.geeksforgeeks.org/java/">Beginner Course 1</a>
+      <a href="https://www.w3schools.com/java/">Beginner Course 2</a>
+      <a href="https://www.youtube.com/watch?v=A74TOX803D0">Beginner Course 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('java-hard')">Go Back</button>
+</div>
+<div class="section" id="php-levels">
+    <h1>PHP: Select a Level</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('php-easy')">Easy</div>
+      <div class="level-item" onclick="showSection('php-intermediate')">Intermediate</div>
+      <div class="level-item" onclick="showSection('php-hard')">Hard</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+  </div>
+
+  <!-- HTML Easy -->
+  <div class="section" id="php-easy">
+    <h1>PHP Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('php-easy-mini-videos')">Mini Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('php-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="php-easy-mini-videos">
+    <h1>PHP Easy Mini Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=KBT2gmAfav4">Beginner Mini Video 1</a>
+      <a href="https://www.youtube.com/watch?v=pWG7ajC_OVo&list=PL4cUxeGkcC9gksOX3Kd9KPo-O68ncT05o">Beginner Mini Video 2</a>
+      <a href="https://www.youtube.com/watch?v=3B-CnezwEeo&list=PL4cUxeGkcC9gksOX3Kd9KPo-O68ncT05o&index=2">Beginner Mini Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('php-easy')">Go Back</button>
+  </div>
+<div class="section" id="php-intermediate">
+    <h1>PHP Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('php-intermediate-videos')">Mini Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('php-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="php-intermediate-videos">
+    <h1>PHP Intermediate Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=hx38tnlYGlA">Beginner Video 1</a>
+      <a href="https://www.youtube.com/watch?v=KBT2gmAfav4&t=9s">Beginner Video 2</a>
+      <a href="https://www.youtube.com/watch?v=Ekz9nPPDZyk">Beginner Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('php-intermediate')">Go Back</button>
+  </div>
+  
+  <!-- HTML Hard -->
+  <div class="section" id="php-hard">
+    <h1>PHP Hard</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('php-hard-courses')">Courses</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('php-levels')">Go Back</button>
+  </div>
+  <div class="section" id="php-hard-courses">
+    <h1>PHP Easy Courses</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=zZ6vybT1HQs">Beginner Course 1</a>
+      <a href="https://www.w3schools.com/php/">Beginner Course 2</a>
+      <a href="https://www.geeksforgeeks.org/php-tutorial/?ref=lbp">Beginner Course 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('php-hard')">Go Back</button>
+</div>
+<div class="section" id="python-levels">
+    <h1>Python: Select a Level</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('python-easy')">Easy</div>
+      <div class="level-item" onclick="showSection('python-intermediate')">Intermediate</div>
+      <div class="level-item" onclick="showSection('python-hard')">Hard</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+  </div>
+
+  <!-- HTML Easy -->
+  <div class="section" id="python-easy">
+    <h1>Python Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('python-easy-mini-videos')">Mini Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('python-levels')">Go Back</button>
+  </div>
+
+  <div class="section" id="python-easy-mini-videos">
+    <h1>Python Easy Mini Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=GmdGv5ndX54&list=PLS8lzSv6JRJ2OC7KVp05jqtY4MgLsitdX">Beginner Mini Video 1</a>
+      <a href="https://www.youtube.com/watch?v=km9n6uvZrP0">Beginner Mini Video 2</a>
+      <a href="https://www.youtube.com/watch?v=Gx5qb1uHss4">Beginner Mini Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('python-easy')">Go Back</button>
+  </div>
+<div class="section" id="python-intermediate">
+    <h1>Python Easy: Select Content Type</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('python-intermediate-videos')">Videos</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('python-levels')">Go Back</button>
+  </div>
+  <div class="section" id="python-intermediate-videos">
+    <h1>Python Intermediate Videos</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=_xQNeOTRyig&t=35s">Beginner Video 1</a>
+      <a href="https://www.youtube.com/watch?v=WEm3EUdicDg">Beginner Video 2</a>
+      <a href="https://www.youtube.com/watch?v=9ngKAf2wrkE">Beginner Video 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('python-intermediate')">Go Back</button>
+  </div>
+  
+
+  <!-- HTML Hard -->
+  <div class="section" id="python-hard">
+    <h1>Python Hard</h1>
+    <div class="levels-grid">
+      <div class="level-item" onclick="showSection('python-hard-courses')">Courses</div>
+    </div>
+    <button class="navigate-btn" onclick="showSection('python-levels')">Go Back</button>
+  </div>
+  <div class="section" id="python-hard-courses">
+    <h1>Python Easy Courses</h1>
+    <div class="link-list">
+      <a href="https://www.youtube.com/watch?v=eWRfhZUzrAc&t=14325s">Beginner Course 1</a>
+      <a href="https://www.w3schools.com/python/">Beginner Course 2</a>
+      <a href="https://www.geeksforgeeks.org/python-programming-language-tutorial/">Beginner Course 3</a>
+    </div>
+    <button class="navigate-btn" onclick="showSection('python-hard')">Go Back</button>
+</div>
+<div class="section" id="sql-levels">
+  <h1>HTML: Select a Level</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('sql-easy')">Easy</div>
+    <div class="level-item" onclick="showSection('sql-intermediate')">Intermediate</div>
+    <div class="level-item" onclick="showSection('sql-hard')">Hard</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+</div>
+
+<!-- HTML Easy -->
+<div class="section" id="sql-easy">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('sql-easy-mini-videos')">Mini Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('sql-levels')">Go Back</button>
+</div>
+
+<div class="section" id="sql-easy-mini-videos">
+  <h1>HTML Easy Mini Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=n5_xbBGMlOQ">Beginner Mini Video 1</a>
+    <a href="https://www.youtube.com/watch?v=wmiDdBG-yP4">Beginner Mini Video 2</a>
+    <a href="https://www.youtube.com/watch?v=3s0lFtUrhSQ">Beginner Mini Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('sql-easy')">Go Back</button>
+</div>
+<div class="section" id="sql-intermediate">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('sql-intermediate-videos')">Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('sql-levels')">Go Back</button>
+</div>
+<div class="section" id="sql-intermediate-videos">
+  <h1>HTML Intermediate Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=5uGCZBFTEow">Beginner Video 1</a>
+    <a href="https://www.youtube.com/watch?v=3HX9rOQiKOs">Beginner Video 2</a>
+    <a href="https://www.youtube.com/watch?v=0y28cbROUY0">Beginner Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('sql-intermediate')">Go Back</button>
+</div>
+<div class="section" id="sql-hard">
+  <h1>HTML Hard</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('sql-hard-courses')">Courses</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('sql-levels')">Go Back</button>
+</div>
+<div class="section" id="sql-hard-courses">
+  <h1>HTML Easy Courses</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=7S_tz1z_5bA">Beginner Course 1</a>
+    <a href="https://www.youtube.com/watch?v=hlGoQC332VM">Beginner Course 2</a>
+    <a href="https://www.geeksforgeeks.org/sql-tutorial/">Beginner Course 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('sql-hard')">Go Back</button>
+</div>
+<div class="section" id="nextjs-levels">
+  <h1>HTML: Select a Level</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('nextjs-easy')">Easy</div>
+    <div class="level-item" onclick="showSection('nextjs-intermediate')">Intermediate</div>
+    <div class="level-item" onclick="showSection('nextjs-hard')">Hard</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+</div>
+
+<!-- HTML Easy -->
+<div class="section" id="nextjs-easy">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('nextjs-easy-mini-videos')">Mini Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('nextjs-levels')">Go Back</button>
+</div>
+
+<div class="section" id="nextjs-easy-mini-videos">
+  <h1>HTML Easy Mini Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=O8ivm7403rk">Beginner Mini Video 1</a>
+    <a href="https://www.youtube.com/watch?v=ZjAqacIC_3c&list=PLC3y8-rFHvwjOKd6gdf4QtV1uYNiQnruI">Beginner Mini Video 2</a>
+    <a href="https://www.youtube.com/watch?v=ZjAqacIC_3c&list=PLC3y8-rFHvwjOKd6gdf4QtV1uYNiQnruI">Beginner Mini Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('nextjs-easy')">Go Back</button>
+</div>
+<div class="section" id="nextjs-intermediate">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('nextjs-intermediate-videos')">Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('nextjs-levels')">Go Back</button>
+</div>
+<div class="section" id="nextjs-intermediate-videos">
+  <h1>HTML Intermediate Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=_EgI9WH8q1A">Beginner Video 1</a>
+    <a href="https://www.youtube.com/watch?v=1n7slbDB1bQ">Beginner Video 2</a>
+    <a href="https://www.youtube.com/watch?v=mTz0GXj8NN0">Beginner Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('nextjs-intermediate')">Go Back</button>
+</div>
+<div class="section" id="nextjs-hard">
+  <h1>HTML Hard</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('nextjs-hard-courses')">Courses</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('nextjs-levels')">Go Back</button>
+</div>
+<div class="section" id="nextjs-hard-courses">
+  <h1>HTML Easy Courses</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=_EgI9WH8q1A">Beginner Course 1</a>
+    <a href="https://www.geeksforgeeks.org/nextjs/">Beginner Course 2</a>
+    <a href="https://www.tutorialspoint.com/n">Beginner Course 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('nextjs-hard')">Go Back</button>
+</div>
+
+<div class="section" id="mongodb-levels">
+  <h1>HTML: Select a Level</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('mongodb-easy')">Easy</div>
+    <div class="level-item" onclick="showSection('mongodb-intermediate')">Intermediate</div>
+    <div class="level-item" onclick="showSection('mongodb-hard')">Hard</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+</div>
+
+<!-- HTML Easy -->
+<div class="section" id="mongodb-easy">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('mongodb-easy-mini-videos')">Mini Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('mongodb-levels')">Go Back</button>
+</div>
+
+<div class="section" id="mongodb-easy-mini-videos">
+  <h1>HTML Easy Mini Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=Ya0H-7A5cE4&list=PLp50dWW_m40UWFSV6PTgYzciZJIxgHy7Q&index=1">Beginner Mini Video 1</a>
+    <a href="https://www.youtube.com/watch?v=ExcRbA7fy_A&list=PL4cUxeGkcC9h77dJ-QJlwGlZlTd4ecZOA">Beginner Mini Video 2</a>
+    <a href="#">Beginner Mini Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('mongodb-easy')">Go Back</button>
+</div>
+<div class="section" id="mongodb-intermediate">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('mongodb-intermediate-videos')">Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('mongodb-levels')">Go Back</button>
+</div>
+<div class="section" id="mongodb-intermediate-videos">
+  <h1>HTML Intermediate Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=Www6cTUymCY">Beginner Video 1</a>
+    <a href="https://www.youtube.com/watch?v=c2M-rlkkT5o">Beginner Video 2</a>
+    <a href="https://www.youtube.com/watch?v=ofme2o29ngU">Beginner Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('mongodb-intermediate')">Go Back</button>
+</div>
+<div class="section" id="mongodb-hard">
+  <h1>HTML Hard</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('mongodb-hard-courses')">Courses</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('mongodb-levels')">Go Back</button>
+</div>
+<div class="section" id="mongodb-hard-courses">
+  <h1>HTML Easy Courses</h1>
+  <div class="link-list">
+    <a href="https://www.w3schools.com/mongodb/">Beginner Course 1</a>
+    <a href="https://www.geeksforgeeks.org/mongodb-tutorial/">Beginner Course 2</a>
+    <a href="https://www.tutorialspoint.com/mongodb/index.htm">Beginner Course 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('mongodb-hard')">Go Back</button>
+</div>
+<div class="section" id="c-levels">
+  <h1>HTML: Select a Level</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('c-easy')">Easy</div>
+    <div class="level-item" onclick="showSection('c-intermediate')">Intermediate</div>
+    <div class="level-item" onclick="showSection('c-hard')">Hard</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+</div>
+
+<!-- HTML Easy -->
+<div class="section" id="c-easy">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('c-easy-mini-videos')">Mini Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('c-levels')">Go Back</button>
+</div>
+
+<div class="section" id="c-easy-mini-videos">
+  <h1>HTML Easy Mini Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=dTp0c41XnrQ">Beginner Mini Video 1</a>
+    <a href="https://www.youtube.com/watch?v=xyQrVEFz9kw">Beginner Mini Video 2</a>
+    <a href="https://www.youtube.com/watch?v=nrbBmoINqtk&list=PLZPZq0r_RZOOzY_vR4zJM32SqsSInGMwe">Beginner Mini Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('c-easy')">Go Back</button>
+</div>
+<div class="section" id="c-intermediate">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('c-intermediate-videos')">Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('c-levels')">Go Back</button>
+</div>
+<div class="section" id="c-intermediate-videos">
+  <h1>HTML Intermediate Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=87SH2Cn0s9A">Beginner Video 1</a>
+    <a href="https://www.youtube.com/watch?v=nXvy5900m3M">Beginner Video 2</a>
+    <a href="https://www.youtube.com/watch?v=N349SLNdTwg">Beginner Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('c-intermediate')">Go Back</button>
+</div>
+<div class="section" id="c-hard">
+  <h1>HTML Hard</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('c-hard-courses')">Courses</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('c-levels')">Go Back</button>
+</div>
+<div class="section" id="c-hard-courses">
+  <h1>HTML Easy Courses</h1>
+  <div class="link-list">
+    <a href="https://www.w3schools.com/c/">Beginner Course 1</a>
+    <a href="https://www.geeksforgeeks.org/c-programming-language/">Beginner Course 2</a>
+    <a href="https://www.tutorialspoint.com/cprogramming/index.htm">Beginner Course 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('c-hard')">Go Back</button>
+</div>
+<div class="section" id="dsa-levels">
+  <h1>HTML: Select a Level</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('dsa-easy')">Easy</div>
+    <div class="level-item" onclick="showSection('dsa-intermediate')">Intermediate</div>
+    <div class="level-item" onclick="showSection('dsa-hard')">Hard</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+</div>
+
+<!-- HTML Easy -->
+<div class="section" id="dsa-easy">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('dsa-easy-mini-videos')">Mini Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('dsa-levels')">Go Back</button>
+</div>
+
+<div class="section" id="dsa-easy-mini-videos">
+  <h1>HTML Easy Mini Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=xLetJpcjHS0&list=PLBlnK6fEyqRj9lld8sWIUNwlKfdUoPd1Y&index=1">Beginner Mini Video 1</a>
+    <a href="https://www.youtube.com/watch?v=oz9cEqFynHU">Beginner Mini Video 2</a>
+    <a href="https://www.youtube.com/watch?v=Gj5qBheGOEo&list=PLWKjhJtqVAbkso-IbgiiP48n-O-JQA9PJ&index=1">Beginner Mini Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('dsa-easy')">Go Back</button>
+</div>
+<div class="section" id="dsa-intermediate">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('dsa-intermediate-videos')">Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('dsa-levels')">Go Back</button>
+</div>
+<div class="section" id="dsa-intermediate-videos">
+  <h1>HTML Intermediate Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=mzrn7tEo3GA">Beginner Video 1</a>
+    <a href="https://www.youtube.com/watch?v=CBYHwZcbD-s">Beginner Video 2</a>
+    <a href="https://www.youtube.com/watch?v=4_HOnhB64Dg">Beginner Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('dsa-intermediate')">Go Back</button>
+</div>
+<div class="section" id="dsa-hard">
+  <h1>HTML Hard</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('dsa-hard-courses')">Courses</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('dsa-levels')">Go Back</button>
+</div>
+<div class="section" id="dsa-hard-courses">
+  <h1>HTML Easy Courses</h1>
+  <div class="link-list">
+    <a href="https://www.geeksforgeeks.org/dsa-tutorial-learn-data-structures-and-algorithms/">Beginner Course 1</a>
+    <a href="https://www.w3schools.com/dsa/">Beginner Course 2</a>
+    <a href="https://www.freecodecamp.org/news/learn-data-structures-and-algorithms/">Beginner Course 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('dsa-hard')">Go Back</button>
+</div>
+<div class="section" id="javascript-levels">
+  <h1>HTML: Select a Level</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('javascript-easy')">Easy</div>
+    <div class="level-item" onclick="showSection('javascript-intermediate')">Intermediate</div>
+    <div class="level-item" onclick="showSection('javascript-hard')">Hard</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('page-1')">Go Back</button>
+</div>
+
+<!-- HTML Easy -->
+<div class="section" id="javascript-easy">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('javascript-easy-mini-videos')">Mini Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('javascript-levels')">Go Back</button>
+</div>
+
+<div class="section" id="javascript-easy-mini-videos">
+  <h1>HTML Easy Mini Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=PlbupGCBV6w&list=PLsyeobzWxl7rrvgG7MLNIMSTzVCDZZcT4">Beginner Mini Video 1</a>
+    <a href="https://www.youtube.com/watch?v=upDLs1sn7g4&list=PLTjRvDozrdlxEIuOBZkMAK5uiqp8rHUax">Beginner Mini Video 2</a>
+    <a href="https://www.youtube.com/watch?v=sQ8GIUU2Auk">Beginner Mini Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('javascript-easy')">Go Back</button>
+</div>
+<div class="section" id="javascript-intermediate">
+  <h1>HTML Easy: Select Content Type</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('javascript-intermediate-videos')">Videos</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('javascript-levels')">Go Back</button>
+</div>
+<div class="section" id="javascript-intermediate-videos">
+  <h1>HTML Intermediate Videos</h1>
+  <div class="link-list">
+    <a href="https://www.youtube.com/watch?v=fKv9cwTLFtY">Beginner Video 1</a>
+    <a href="https://www.youtube.com/watch?v=W6NZfCO5SIk&t=1s">Beginner Video 2</a>
+    <a href="https://www.youtube.com/watch?v=Ihy0QziLDf0&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv">Beginner Video 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('javascript-intermediate')">Go Back</button>
+</div>
+<div class="section" id="javascript-hard">
+  <h1>HTML Hard</h1>
+  <div class="levels-grid">
+    <div class="level-item" onclick="showSection('javascript-hard-courses')">Courses</div>
+  </div>
+  <button class="navigate-btn" onclick="showSection('javascript-levels')">Go Back</button>
+</div>
+<div class="section" id="javascript-hard-courses">
+  <h1>HTML Easy Courses</h1>
+  <div class="link-list">
+    <a href="https://www.geeksforgeeks.org/javascript/">Beginner Course 1</a>
+    <a href="https://www.w3schools.com/js/">Beginner Course 2</a>
+    <a href="https://www.tpointtech.com/javascript-tutorial">Beginner Course 3</a>
+  </div>
+  <button class="navigate-btn" onclick="showSection('javascript-hard')">Go Back</button>
+</div>
+
+
+
+  <script>
+    function showSection(sectionId) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach(function (section) {
+        section.classList.remove('active');
+      });
+      // Show the selected section
+      document.getElementById(sectionId).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
