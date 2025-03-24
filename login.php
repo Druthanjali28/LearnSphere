@@ -1,31 +1,42 @@
 <?php
+session_start(); // Start the session at the beginning
+
 include 'db-config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['email']) && !empty($_POST['password'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
 
-        // Query to check if email exists
+        // Validate email format
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            die("Invalid email format!");
+        }
+
+        // Query to check if the email exists
         $sql = "SELECT id, password FROM users WHERE email = ?";
         $stmt = $conn->prepare($sql);
+
+        if (!$stmt) {
+            die("Error in SQL query: " . $conn->error);
+        }
+
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
         if ($stmt->num_rows > 0) {
-            // Fetch the user details
+            // Fetch user details
             $stmt->bind_result($id, $hashed_password);
             $stmt->fetch();
 
-            // Verify the password
+            // Verify password
             if (password_verify($password, $hashed_password)) {
-                // Start session
-                session_start();
-                $_SESSION['user_id'] = $id; // Save user ID in session
-                $_SESSION['email'] = $email; // Save email in session
+                // Store user details in session
+                $_SESSION['user_id'] = $id;
+                $_SESSION['email'] = $email;
 
-                // Redirect to the home page
+                // Redirect to home page
                 header("Location: index.html");
                 exit;
             } else {
@@ -41,17 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Additional functionality starts here (unchanged logic above remains intact)
-
 // Check if the user is already logged in
-session_start();
 if (isset($_SESSION['user_id'])) {
-    // Redirect to the profile page if already logged in
     header("Location: profile.php");
     exit;
 }
-
-// Additional functionality ends here
 
 $conn->close();
 ?>
