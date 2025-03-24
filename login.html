@@ -1,69 +1,77 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="shortcut icon" type="png" href="images/icon/favicon.png">
-	<title>Login SignUp</title>
-	<link rel="stylesheet" type="text/css" href="loginStyle.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="shortcut icon" type="png" href="images/icon/favicon.png">
+    <title>Login SignUp</title>
+    <link rel="stylesheet" type="text/css" href="loginStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <!-- It will redirect to the Home Page after submitting the form -->
-  <script>
-  $(document).ready(function(){
-    $("form").submit(function(){
-      alert("Great Job !");
-    });
-  });
-  </script>
+    <script>
+        function handleCredentialResponse(response) {
+            console.log("Google ID Token:", response.credential);
+            // Redirect to home page upon successful sign-in
+            window.location.href = "index.html"; 
+        }
+
+        function googleSignIn() {
+            google.accounts.id.initialize({
+                client_id: "1053051987654-lb9e50kilpnef5fr72bdtm8b3r2ipiq6.apps.googleusercontent.com", 
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("googleSignInButton"),
+                { theme: "outline", size: "large" }
+            );
+            google.accounts.id.prompt();
+        }
+    </script>
 </head>
-<body>
-		<div class="form-box">
-			<div class="button-box">
-				<div id="btn"></div>
-				<button type="button" class="toggle-btn" id="log" onclick="login()" style="color: #fff;">Log In</button>
-				<button type="button" class="toggle-btn" id="reg" onclick="register()">Register</button>
-			</div>
-			<div class="social-icons">
-				<img src="images/icon/fb2.png">
-				<img src="images/icon/insta2.png">
-				<img src="images/icon/tt2.png">
-			</div>
-			
-			<!-- Login Form -->
-			<form id="login" class="input-group" action="login.php" method="POST">
-				<div class="inp">
-					<img src="images/icon/user.png">
-					<input type="text" name="email" class="input-field" placeholder="Username or Email" style="width: 88%; border:none;" required>
-				</div>
-				<div class="inp">
-					<img src="images/icon/password.png">
-					<input type="password" name="password" class="input-field" placeholder="Password" style="width: 88%; border: none;" required>
-				</div>
-				<input type="checkbox" class="check-box">Remember Password
-				<button type="submit" class="submit-btn">Log In</button>
-			</form>
-			
-
-
-			<div class="other" id="other">
-				<div class="instead">
-					<h3>or</h3>
-				</div>
-				<!--<button class="connect" onclick="google()">
-					<img src="images/icon/google.png"><span>Sign in with Google</span>
-				</button>-->
-			</div>
-			
-			<!-- Registration Form -->
-			<form id="register" class="input-group" action="register.php" method="POST" onsubmit="return validatePasswords()">
-				<input type="text" name="full_name" class="input-field" placeholder="Full Name" required>
-				<input type="email" name="email" class="input-field" placeholder="Email Address" required>
-				<input type="password" id="password" name="password" class="input-field" placeholder="Create Password" required>
-				<input type="password" id="confirm_password" name="confirm_password" class="input-field" placeholder="Confirm Password" required>
-				<input type="checkbox" class="check-box" id="chkAgree" onclick="goFurther()">I agree to the Terms & Conditions
-				<button type="submit" id="btnSubmit" class="submit-btn reg-btn">Register</button>
-			</form>
-			
-		</div>
-		<script type="text/javascript" src="script.js"></script>
+<body onload="googleSignIn()">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" id="log" onclick="login()" style="color: #fff;">Log In</button>
+            <button type="button" class="toggle-btn" id="reg" onclick="register()">Register</button>
+        </div>
+        <div class="social-icons">
+            <img src="images/icon/fb2.png">
+            <img src="images/icon/insta2.png">
+            <img src="images/icon/tt2.png">
+        </div>
+        
+        <!-- Login Form -->
+        <form id="login" class="input-group" action="login.php" method="POST">
+            <div class="inp">
+                <img src="images/icon/user.png">
+                <input type="text" name="email" class="input-field" placeholder="Username or Email" required>
+            </div>
+            <div class="inp">
+                <img src="images/icon/password.png">
+                <input type="password" name="password" class="input-field" placeholder="Password" required>
+            </div>
+            <input type="checkbox" class="check-box">Remember Password
+            <button type="submit" class="submit-btn">Log In</button>
+        </form>
+        
+        <div class="other" id="other">
+            <div class="instead">
+                <div></div>
+                <h3>or</h3>
+            </div>
+            <div id="googleSignInButton"></div>
+        </div>
+        
+        <!-- Registration Form -->
+        <form id="register" class="input-group" action="register.php" method="POST" onsubmit="return validatePasswords()">
+            <input type="text" name="full_name" class="input-field" placeholder="Full Name" required>
+            <input type="email" name="email" class="input-field" placeholder="Email Address" required>
+            <input type="password" id="password" name="password" class="input-field" placeholder="Create Password" required>
+            <input type="password" id="confirm_password" name="confirm_password" class="input-field" placeholder="Confirm Password" required>
+            <input type="checkbox" class="check-box" id="chkAgree">I agree to the Terms & Conditions
+            <button type="submit" class="submit-btn reg-btn">Register</button>
+        </form>
+    </div>
+    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
