@@ -172,6 +172,52 @@
       border-radius: 10px;
     }
 
+    /* Team Section Styles */
+    .team-section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .team-section h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      color: #06BBCC;
+    }
+
+    .team-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .team-member {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 200px;
+      text-align: center;
+    }
+
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      object-fit: cover;
+    }
+
+    .team-member h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .team-member p {
+      font-size: 14px;
+      color: #666;
+    }
+
     /* Footer Styles */
     footer {
       text-align: center;
@@ -193,17 +239,10 @@
           <li><a href="about.html">About</a></li>
           <li><a href="courses.html">Courses</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a href="discussion_form.php">Discussion</a></li>
+          <li><a href="discu.html">Discussion</a></li>
+          <li><a href="feedback.html">Feedback</a></li>
+          <li><a href="quiz.html">Quiz</a></li>
           <li><a href="logout.html">Logout</a></li>
-          <li>
-            <div class="profile-container">
-              <img src="default.png" alt="Profile">
-              <div class="dropdown-menu">
-                <a href="profile.html">View Profile</a>
-                <a href="logout.html">Logout</a>
-              </div>
-            </div>
-          </li>
         </ul>
       </nav>
     </div>
@@ -226,9 +265,36 @@
     </div>
   </section>
 
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-container">
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt="Druthanjali">
+        <h3>Druthanjali</h3>
+        <p>Lead Instructor</p>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=100&h=100&fit=crop&crop=faces" alt="Prasanna">
+        <h3>Prasanna</h3>
+        <p>Course Designer</p>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=faces" alt="Prabavathi">
+        <h3>Prabavathi</h3>
+        <p>Tech Specialist</p>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop&crop=faces" alt="Sahil">
+        <h3>Sahil</h3>
+        <p>Community Manager</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
-    &copy; 2025 LearnSphere. All Rights Reserved.
+    © 2025 LearnSphere. All Rights Reserved.
   </footer>
 </body>
 </html>
