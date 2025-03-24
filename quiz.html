@@ -3,129 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming Quiz</title>
+    <title>Quiz Master - Home</title>
+    <link rel="stylesheet" href="Home.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        .settings {
             text-align: center;
-            background: linear-gradient(to right, #141E30, #243B55);
-            color: white;
+            font-family: Arial, sans-serif;
             padding: 20px;
         }
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
+        .settings__select {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        #quiz-container {
-            max-width: 700px;
-            margin: auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
+        .settings__select select, .settings__select input {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 30px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
-        .btn {
-            display: block;
-            padding: 12px;
-            margin: 8px auto;
-            background: #06BBCC;
+        .settings__select button {
+            width: 200px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #1976d2;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 4px;
             cursor: pointer;
-            width: 90%;
-            max-width: 300px;
-            font-size: 1.2em;
-            transition: 0.3s ease;
         }
-        .btn:hover {
-            background: #048B99;
-            transform: scale(1.05);
+        .settings__select button:hover {
+            background-color: #1565c0;
         }
-        #next-btn {
-            margin-top: 20px;
-            padding: 12px;
-            background: green;
-            border-radius: 5px;
-            display: none;
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <h2>Select a Programming Language</h2>
-    <div id="languages">
-        <button class="btn" onclick="selectLanguage('Python')">Python</button>
-        <button class="btn" onclick="selectLanguage('JavaScript')">JavaScript</button>
-        <button class="btn" onclick="selectLanguage('C++')">C++</button>
-        <button class="btn" onclick="selectLanguage('Java')">Java</button>
-        <button class="btn" onclick="selectLanguage('C#')">C#</button>
-        <button class="btn" onclick="selectLanguage('PHP')">PHP</button>
-        <button class="btn" onclick="selectLanguage('Ruby')">Ruby</button>
-        <button class="btn" onclick="selectLanguage('Swift')">Swift</button>
-        <button class="btn" onclick="selectLanguage('Go')">Go</button>
-        <button class="btn" onclick="selectLanguage('Kotlin')">Kotlin</button>
-        <button class="btn" onclick="selectLanguage('TypeScript')">TypeScript</button>
-        <button class="btn" onclick="selectLanguage('Rust')">Rust</button>
-    </div>
+    <div class="settings">
+        <span style="font-size: 30px;">Quiz Master</span>
+        <div class="settings__select">
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            <div id="numberError" class="error-message" style="display: none;"></div>
 
-    <div id="quiz-container" style="display: none;">
-        <h2 id="question">Loading question...</h2>
-        <div id="options"></div>
-        <button id="next-btn" class="btn" onclick="nextQuestion()" disabled>Next Question</button>
-        <p id="score">Score: 0</p>
+            <select id="category" onchange="updateCategory()">
+                <option value="" disabled selected>Select Category</option>
+                <option value="HTML">Html</option>
+                <option value="React">React</option>
+                <option value="CSS">CSS</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Java">Java</option>
+                <option value="C">C</option>
+                <option value="Python">Python</option>
+                <option value="PHP">PHP</option>
+                <option value="SQL">SQL</option>
+                <option value="Next.js">Next.js</option>
+                <option value="MongoDB">MongoDB</option>
+                <option value="DSA">DSA</option>
+            </select>
+
+            <input
+                type="number"
+                id="number"
+                placeholder="Enter No of Questions (1-50)"
+                min="1"
+                max="50"
+                oninput="handleNumberChange()"
+            />
+
+            <select id="difficulty" onchange="updateDifficulty()">
+                <option value="" disabled selected>Select Difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+
+            <button onclick="handleSubmit()">Start Quiz</button>
+        </div>
     </div>
 
     <script>
-        let selectedLanguage = "";
-        let currentIndex = 0;
-        let score = 0;
-        let quizData = {};
+        let category = "";
+        let difficulty = "";
+        let number = "";
+        let error = false;
+        let numberError = "";
 
-        const questions = {
-            "Python": [
-                { question: "What is Python?", options: ["A snake", "A programming language", "A car", "A game"], answer: "A programming language" },
-                { question: "Who developed Python?", options: ["James Gosling", "Dennis Ritchie", "Guido van Rossum", "Bjarne Stroustrup"], answer: "Guido van Rossum" }
-            ],
-            "JavaScript": [
-                { question: "Which keyword declares a variable in JavaScript?", options: ["var", "define", "int", "declare"], answer: "var" },
-                { question: "What is the output of `typeof null`?", options: ["object", "null", "undefined", "string"], answer: "object" }
-            ]
-        };
-
-        function selectLanguage(language) {
-            selectedLanguage = language;
-            quizData = questions[selectedLanguage];
-            currentIndex = 0;
-            score = 0;
-            document.getElementById("languages").style.display = "none";
-            document.getElementById("quiz-container").style.display = "block";
-            loadQuestion();
+        function updateCategory() {
+            category = document.getElementById('category').value;
         }
 
-        function loadQuestion() {
-            let currentQuestion = quizData[currentIndex];
-            document.getElementById("question").innerText = currentQuestion.question;
-            document.getElementById("options").innerHTML = currentQuestion.options.map(option =>
-                `<button class="btn" onclick="checkAnswer(this, '${option}')">${option}</button>`
-            ).join('');
-            document.getElementById("next-btn").disabled = true;
+        function updateDifficulty() {
+            difficulty = document.getElementById('difficulty').value;
         }
 
-        function checkAnswer(button, answer) {
-            let correctAnswer = quizData[currentIndex].answer;
-            if (answer === correctAnswer) {
-                button.style.background = "green";
-                score++;
+        function handleNumberChange() {
+            const input = document.getElementById('number');
+            let value = parseInt(input.value);
+            if (value > 50) {
+                numberError = "Please enter a number between 1 and 50";
+                document.getElementById('numberError').textContent = numberError;
+                document.getElementById('numberError').style.display = 'block';
             } else {
-                button.style.background = "red";
+                numberError = "";
+                document.getElementById('numberError').style.display = 'none';
             }
-            document.getElementById("score").innerText = `Score: ${score}`;
-            document.getElementById("next-btn").disabled = false;
+            number = Math.max(1, value);
+            input.value = number;
         }
 
-        function nextQuestion() {
-            currentIndex = (currentIndex + 1) % quizData.length;
-            loadQuestion();
+        function handleSubmit() {
+            if (!category || !difficulty || !number || numberError) {
+                error = true;
+                document.getElementById('errorMessage').textContent = "Please fill all the fields";
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+
+            error = false;
+            document.getElementById('errorMessage').style.display = 'none';
+
+            sessionStorage.setItem('category', category);
+            sessionStorage.setItem('difficulty', difficulty);
+            sessionStorage.setItem('number', number);
+
+            window.location.href = 'Questions.html';
         }
     </script>
 </body>
