@@ -1,64 +1,764 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - LearnSphere</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - LearnSphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: #f8f9fa; color: #333; }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(90deg, #06BBCC, #08A0B2);
+            padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: white; text-transform: uppercase; letter-spacing: 1.5px; }
+        .nav-links { display: flex; align-items: center; list-style: none; }
+        .nav-links li { margin: 0 10px; }
+        .nav-links a { padding: 8px 12px; color: white; font-weight: 500; border-radius: 5px; transition: background 0.3s ease; }
+        .nav-links a:hover { background: rgba(255, 255, 255, 0.2); }
+
+        /* General Section Styles */
+        section { padding: 40px 20px; background: linear-gradient(135deg, #E0F7FA, #B2EBF2); }
+        h2 { text-align: center; color: #06BBCC; margin-bottom: 30px; }
+
+        /* Hero Section */
+        .hero { height: 100vh; background: url('home.jpg') no-repeat center center/cover; position: relative; }
+        .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; align-items: center; justify-content: center; }
+        .hero-content { text-align: center; color: white; }
+        .hero-content h1 { font-size: 48px; margin-bottom: 20px; }
+        .hero-content h3 { font-size: 24px; margin-bottom: 10px; }
+        .hero-content p { font-size: 18px; max-width: 600px; margin: 0 auto 20px; }
+        .hero-buttons .btn { padding: 10px 20px; margin: 0 10px; border-radius: 5px; text-decoration: none; }
+        .btn.blue { background: #06BBCC; color: white; }
+        .btn.white { background: white; color: #06BBCC; }
+
+        /* Courses Section */
+        #courses {
+            position: relative;
+            min-height: 100vh;
+        }
+        #courses h2 {
+            color: #06BBCC;
+        }
+        .section { display: none; min-height: 100vh; text-align: center; }
+        .section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px; max-width: 1200px; margin: auto; }
+        .course-item { 
+            background: #FFFFFF; 
+            border-radius: 12px; 
+            text-align: center; 
+            padding: 50px 0; 
+            font-size: 1.5em; 
+            font-weight: bold; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
+            transition: all 0.3s ease-in-out; 
+            cursor: pointer; 
+            color: #333; 
+        }
+        .course-item:hover { 
+            transform: scale(1.05); 
+            background: #E0F7FA; 
+            color: #4DB6AC; 
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Quiz Section */
+      
+        .settings { text-align: center; padding: 20px; }
+        .settings__select { margin-top: 20px; display: flex; flex-direction: column; align-items: center; }
+        .settings__select select, .settings__select input { 
+            width: 300px; 
+            padding: 10px; 
+            margin-bottom: 30px; 
+            font-size: 16px; 
+            border: 1px solid #B0BEC5; 
+            border-radius: 5px; 
+            background: #FFFFFF; 
+            color: #333; 
+            transition: border-color 0.3s ease; 
+        }
+        .settings__select select:hover, .settings__select input:hover {
+            border-color: #26A69A;
+        }
+        .settings__select select:focus, .settings__select input:focus {
+            outline: none;
+            border-color: #4DB6AC;
+        }
+        .settings__select button { 
+            width: 200px; 
+            padding: 10px; 
+            font-size: 16px; 
+            background-color: #4DB6AC; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            transition: background 0.3s ease; 
+        }
+        .settings__select button:hover { 
+            background-color: #26A69A; 
+        }
+        .error-message { color: #EF5350; margin-bottom: 20px; }
+
+        /* Discussion Section */
+       
+        .top-bar { 
+            display: flex; 
+            justify-content: space-between; 
+            background: #4DB6AC; 
+            color: white; 
+            padding: 15px 20px; 
+            border-radius: 8px; 
+            margin-bottom: 20px;
+        }
+        .top-bar h3 { font-size: 24px; }
+        .discussion-section { 
+            background: #FFFFFF; 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); 
+        }
+        .filter-buttons { 
+            margin-bottom: 20px; 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+        }
+        .filter-buttons button { 
+            padding: 8px 15px; 
+            background: #FFFFFF; 
+            border: 1px solid #B0BEC5; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            color: #333; 
+            transition: background 0.3s ease, border-color 0.3s ease; 
+        }
+        .filter-buttons button:hover { 
+            background: #E0F7FA; 
+            border-color: #4DB6AC; 
+        }
+        .questions-container { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 15px; 
+        }
+        .question-card { 
+            background: #FFFFFF; 
+            padding: 15px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+        }
+        .question-card div { 
+            font-weight: bold; 
+            color: #333; 
+            margin-bottom: 5px; 
+        }
+        .question-card p { 
+            color: #666; 
+            margin-bottom: 10px; 
+        }
+        .question-card small { 
+            color: #999; 
+            font-size: 12px; 
+        }
+        .button-row { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 10px; 
+        }
+        .reply-btn { 
+            background: #4DB6AC; 
+            color: white; 
+            padding: 8px 15px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 5px; 
+            transition: background 0.3s ease; 
+        }
+        .reply-btn:hover { 
+            background: #26A69A; 
+        }
+        .view-replies-link { 
+            color: #80CBC4; 
+            text-decoration: none; 
+            cursor: pointer; 
+            font-size: 14px; 
+            padding-left: 10px; 
+            transition: color 0.3s ease; 
+        }
+        .view-replies-link:hover { 
+            color: #4DB6AC; 
+        }
+        .replies-section { 
+            display: none; 
+            margin-top: 10px; 
+            padding: 10px; 
+            background: #E0F7FA; 
+            border-radius: 5px; 
+        }
+        .popup-overlay { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(0, 0, 0, 0.5); 
+            justify-content: center; 
+            align-items: center; 
+        }
+        .popup { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 10px; 
+            width: 400px; 
+        }
+        .popup input, .popup textarea { 
+            width: 100%; 
+            padding: 10px; 
+            margin-bottom: 10px; 
+            border: 1px solid #B0BEC5; 
+            border-radius: 5px; 
+        }
+        .popup button { 
+            padding: 10px; 
+            margin: 5px; 
+            background: #4DB6AC; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            transition: background 0.3s ease; 
+        }
+        .popup button:hover { 
+            background: #26A69A; 
+        }
+
+        /* Feedback Section */
+        
+        .feedback-container { 
+            width: 70%; 
+            max-width: 800px; 
+            background-color: white; 
+            display: flex; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+            overflow: hidden; 
+            margin: 40px auto; 
+        }
+        .illustration { 
+            flex: 1; 
+            background-color: #06BBCC; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .illustration img { 
+            max-width: 80%; 
+            height: auto; 
+        }
+        .form-section { 
+            flex: 1; 
+            padding: 20px; 
+            text-align: center; 
+        }
+        .form-section h1 { 
+            color: #06BBCC; 
+        }
+        .form-group { 
+            text-align: left; 
+            margin-bottom: 15px; 
+        }
+        .form-group label { 
+            font-weight: bold; 
+        }
+        .form-group input, .form-group textarea { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+        }
+        .form-group textarea { 
+            resize: vertical; 
+        }
+        .form-group button { 
+            width: 100%; 
+            padding: 10px; 
+            background-color: #06BBCC; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        .view-responses-link { 
+            color: #06BBCC; 
+            font-weight: 500; 
+        }
+
+        /* Footer Section */
+        footer {
+            background: linear-gradient(90deg, #E6F7FA, #B2EBF2);
+            color: #333;
+            padding: 40px 20px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .footer-container h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+            text-transform: uppercase;
+        }
+        .footer-container p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .footer-container ul {
+            list-style: none;
+        }
+        .footer-container ul li {
+            margin-bottom: 10px;
+        }
+        .footer-container ul li a {
+            color: #26C6DA;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        .footer-container ul li a:hover {
+            color: #00ACC1;
+        }
+        .footer-container ul li a::before {
+            content: '•';
+            margin-right: 8px;
+            color: #FF7043;
+            font-size: 10px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: #666;
+            font-size: 18px;
+            transition: color 0.3s ease, background 0.3s ease;
+            background: #fff;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .social-icons a:hover {
+            color: #FF7043;
+            background: #F5F5F5;
+        }
+        .footer-form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            background: #F5F5F5;
+            color: #333;
+            font-size: 14px;
+        }
+        .footer-form input::placeholder {
+            color: #999;
+        }
+        .footer-form button {
+            width: 100%;
+            padding: 10px;
+            background: #FF7043;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: background 0.3s ease;
+        }
+        .footer-form button:hover {
+            background: #F4511E;
+        }
+    </style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="container">
-      <h1>LearnSphere</h1>
-      <nav>
-        <ul>
-          <li><a href="login.html" class="btn white">Get started</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="overlay">
-      <div class="hero-content">
-        <h3>Best Online Courses</h3>
-        <h1>The Best Online Learning Platform</h1>
-        <p>Online education has transformed the way people acquire knowledge, making learning more accessible, flexible, and convenient. With the rise of digital platforms, students can now access quality education from anywhere in the worsld.</p>
-        <div class="hero-buttons">
-          <a href="#read-more" class="btn blue">Read More</a>
-          <a href="#join-now" class="btn white">Join Now</a>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">LearnSphere</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="login.html">Get Started</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-    </div>
-  </section>
+    </header>
 
-  <!-- Additional Image Section -->
-  <!--<section class="additional-image">
-    <img src="images/extra/b1.jpg" alt="Additional Image" class="additional-img">
-  </section>-->
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="overlay">
+            <div class="hero-content">
+                <h3>Best Online Courses</h3>
+                <h1>The Best Online Learning Platform</h1>
+                <p>Online education has transformed the way people acquire knowledge, making learning more accessible, flexible, and convenient.</p>
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn blue">Explore Courses</a>
+                    <a href="#quiz" class="btn white">Take a Quiz</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // Array of background image URLs
-    const backgroundImages = [
-      'home.jpg', 
-      'images/extra/b1.jpg', 
-      'images/extra/b2.jpg', 
-      'images/extra/b3.jpg',
-      'images/extra/b4.jpg'
-    ];
-    let currentImageIndex = 0;
+    <!-- Courses Section -->
+    <section id="courses">
+        <h2>Courses</h2>
+        <div class="section active" id="page-1">
+            <div class="courses-grid">
+                <div class="course-item" onclick="showSection('html-levels')">HTML</div>
+                <div class="course-item" onclick="showSection('css-levels')">CSS</div>
+                <div class="course-item" onclick="showSection('javascript-levels')">JavaScript</div>
+                <div class="course-item" onclick="showSection('react-levels')">React</div>
+                <div class="course-item" onclick="showSection('nextjs-levels')">Next.js</div>
+                <div class="course-item" onclick="showSection('java-levels')">Java</div>
+                <div class="course-item" onclick="showSection('python-levels')">Python</div>
+                <div class="course-item" onclick="showSection('sql-levels')">SQL</div>
+                <div class="course-item" onclick="showSection('mongodb-levels')">MongoDB</div>
+                <div class="course-item" onclick="showSection('dsa-levels')">DSA</div>
+                <div class="course-item" onclick="showSection('c-levels')">C</div>
+            </div>
+        </div>
+    </section>
 
-    // Function to change background image
-    function changeBackgroundImage() {
-      const heroSection = document.querySelector('.hero');
-      currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;  // Loop through images
-      heroSection.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
-    }
+    <!-- Quiz Section -->
+    <section id="quiz">
+        <h2>Quiz Master</h2>
+        <div class="settings">
+            <div class="settings__select">
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                <div id="numberError" class="error-message" style="display: none;"></div>
+                <select id="category" onchange="updateCategory()">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="HTML">Html</option>
+                    <option value="React">React</option>
+                    <option value="CSS">CSS</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Java">Java</option>
+                    <option value="C">C</option>
+                    <option value="Python">Python</option>
+                    <option value="PHP">PHP</option>
+                    <option value="SQL">SQL</option>
+                    <option value="Next.js">Next.js</option>
+                    <option value="MongoDB">MongoDB</option>
+                    <option value="DSA">DSA</option>
+                </select>
+                <input type="number" id="number" placeholder="Enter No of Questions (1-50)" min="1" max="50" oninput="handleNumberChange()" />
+                <select id="difficulty" onchange="updateDifficulty()">
+                    <option value="" disabled selected>Select Difficulty</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+                <button onclick="handleSubmit()">Start Quiz</button>
+            </div>
+        </div>
+    </section>
 
-    // Change background every  2 seconds
-    setInterval(changeBackgroundImage, 2000);
-  </script>
-</body>
+    <!-- Discussion Forum Section -->
+    <section id="discussion">
+        <h2>Discussion Forum</h2>
+        <div class="top-bar">
+            <h3>Discussion Forum</h3>
+            <button class="reply-btn" onclick="openPopup()">Raise Question</button>
+        </div>
+        <div class="discussion-section">
+            <div class="filter-buttons">
+                <button onclick="fetchDiscussions('all')">All</button>
+                <button onclick="fetchDiscussions('today')">Today</button>
+                <button onclick="fetchDiscussions('this-week')">This Week</button>
+                <button onclick="fetchDiscussions('this-month')">This Month</button>
+                <button onclick="fetchDiscussions('last-month')">Last Month</button>
+                <button onclick="fetchDiscussions('this-year')">This Year</button>
+                <button onclick="fetchDiscussions('last-year')">Last Year</button>
+            </div>
+            <div class="questions-container" id="questionsContainer"></div>
+        </div>
+        <div class="popup-overlay" id="popupOverlay">
+            <div class="popup">
+                <h3>Raise a Question</h3>
+                <input type="text" placeholder="Your Name" id="userName">
+                <input type="text" placeholder="Topic" id="topic">
+                <textarea placeholder="Ask your question here..." rows="4" id="questionText"></textarea>
+                <button onclick="closePopup()">Cancel</button>
+                <button onclick="submitQuestion()">Submit</button>
+            </div>
+        </div>
+        <div class="popup-overlay" id="replyPopup">
+            <div class="popup">
+                <h3>Give Reply</h3>
+                <input type="text" placeholder="Your Name" id="replyUserName">
+                <textarea placeholder="Your reply here..." rows="4" id="replyText"></textarea>
+                <button onclick="closeReplyPopup()">Cancel</button>
+                <button onclick="submitReply()">Submit</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback">
+        <h2>Feedback</h2>
+        <div class="feedback-container">
+            <div class="illustration">
+                <img src="images/extra/feedback.jpeg" alt="Illustration">
+            </div>
+            <div class="form-section">
+                <h1>Feedback Form</h1>
+                <form id="feedback-form">
+                    <div class="form-group">
+                        <label for="user-name">Name</label>
+                        <input type="text" id="user-name" name="userName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-feedback">Feedback</label>
+                        <textarea id="user-feedback" name="userFeedback" rows="4" placeholder="Write your feedback here..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Rate Us</label>
+                        <input type="number" id="rating" name="rating" min="1" max="5" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Submit Feedback</button>
+                    </div>
+                </form>
+                <p>Already submitted feedback? <a href="view_responses.php" class="view-responses-link">View Responses</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div>
+                <h3>LearnSphere</h3>
+                <p>LearnSphere is an online learning platform offering courses, quizzes, and discussion forums to help you master new skills.</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#quiz">Quiz Master</a></li>
+                    <li><a href="#discussion">Discussion Forum</a></li>
+                    <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Additional Pages</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Quick Support</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Contact Us</h3>
+                <form class="footer-form" id="footer-contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <input type="text" name="subject" placeholder="Subject" required>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hero Background Slideshow
+        const backgroundImages = ['home.jpg', 'images/extra/b1.jpg', 'images/extra/b2.jpg', 'images/extra/b3.jpg', 'images/extra/b4.jpg'];
+        let currentImageIndex = 0;
+        function changeBackgroundImage() {
+            const heroSection = document.querySelector('.hero');
+            currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+            heroSection.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+        }
+        setInterval(changeBackgroundImage, 2000);
+
+        // Courses Navigation
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // Quiz Logic
+        let category = "", difficulty = "", number = "", error = false, numberError = "";
+        function updateCategory() { category = document.getElementById('category').value; }
+        function updateDifficulty() { difficulty = document.getElementById('difficulty').value; }
+        function handleNumberChange() {
+            const input = document.getElementById('number');
+            let value = parseInt(input.value);
+            if (value > 50) {
+                numberError = "Please enter a number between 1 and 50";
+                document.getElementById('numberError').textContent = numberError;
+                document.getElementById('numberError').style.display = 'block';
+            } else {
+                numberError = "";
+                document.getElementById('numberError').style.display = 'none';
+            }
+            number = Math.max(1, value);
+            input.value = number;
+        }
+        function handleSubmit() {
+            if (!category || !difficulty || !number || numberError) {
+                error = true;
+                document.getElementById('errorMessage').textContent = "Please fill all the fields";
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
+            }
+            error = false;
+            document.getElementById('errorMessage').style.display = 'none';
+            sessionStorage.setItem('category', category);
+            sessionStorage.setItem('difficulty', difficulty);
+            sessionStorage.setItem('number', number);
+            window.location.href = 'Questions.html';
+        }
+
+        // Discussion Forum Logic
+        let currentQuestionId = null;
+        function openPopup() { document.getElementById('popupOverlay').style.display = 'flex'; }
+        function closePopup() { document.getElementById('popupOverlay').style.display = 'none'; }
+        function openReplyPopup(questionId) { currentQuestionId = questionId; document.getElementById('replyPopup').style.display = 'flex'; }
+        function closeReplyPopup() { document.getElementById('replyPopup').style.display = 'none'; }
+        async function fetchDiscussions(filter = 'all') {
+            const mockDiscussions = [
+                { id: 1, topic: "EWRQ", question_text: "ds", user_name: "DS", created_at: "2025-03-21 21:06:09", replies: [] },
+                { id: 2, topic: "EWRQ", question_text: "ds", user_name: "Drutha", created_at: "2025-03-21 21:06:38", replies: [] },
+                { id: 3, topic: "w", question_text: "s", user_name: "w", created_at: "2025-03-21 21:07:34", replies: [] },
+                { id: 4, topic: "sql", question_text: "acronym", user_name: "MUPPARAJU DRUTHANJALI", created_at: "2025-03-21 21:30:47", replies: [] },
+                { id: 5, topic: "GSA", question_text: "SA", user_name: "sa", created_at: "2025-03-21 21:33:12", replies: [] },
+                { id: 6, topic: "fsda", question_text: "fdsa", user_name: "ds", created_at: "2025-03-21 21:34:24", replies: [] },
+                { id: 7, topic: "sdf", question_text: "sda", user_name: "adsa", created_at: "2025-03-21 21:34:55", replies: [] },
+                { id: 8, topic: "er", question_text: "rew", user_name: "MUPPARAJU DRUTHANJALI", created_at: "2025-03-21 21:36:25", replies: [] },
+                { id: 9, topic: "sql", question_text: "full form", user_name: ".", created_at: "2025-03-21 21:54:50", replies: [] },
+                { id: 10, topic: "ml", question_text: "full form", user_name: "Drutha", created_at: "2025-03-22 06:16:12", replies: [] },
+                { id: 11, topic: "ml", question_text: "full form", user_name: "chandu", created_at: "2025-03-23 08:45:50", replies: [] },
+                { id: 12, topic: "ml", question_text: "full form", user_name: "chandu", created_at: "2025-03-23 08:52:49", replies: [] },
+            ];
+
+            const discussions = mockDiscussions.filter(discussion => {
+                const date = new Date(discussion.created_at);
+                const now = new Date();
+                if (filter === 'today') return date.toDateString() === now.toDateString();
+                if (filter === 'this-week') return date >= new Date(now.setDate(now.getDate() - 7));
+                if (filter === 'this-month') return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+                if (filter === 'last-month') {
+                    const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+                    return date.getMonth() === lastMonth.getMonth() && date.getFullYear() === lastMonth.getFullYear();
+                }
+                if (filter === 'this-year') return date.getFullYear() === now.getFullYear();
+                if (filter === 'last-year') return date.getFullYear() === now.getFullYear() - 1;
+                return true;
+            });
+
+            const container = document.getElementById("questionsContainer");
+            container.innerHTML = "";
+            discussions.forEach(discussion => {
+                let repliesHtml = discussion.replies.map(reply => 
+                    `<div><strong>${reply.reply_user_name}:</strong> ${reply.reply_text} <small>(${reply.created_at})</small></div>`
+                ).join('');
+                container.innerHTML += `
+                    <div class="question-card" data-filter="${filter}">
+                        <div><strong>${discussion.topic}</strong></div>
+                        <p>${discussion.question_text}</p>
+                        <small>Asked by: ${discussion.user_name} on ${discussion.created_at}</small>
+                        <div class="button-row">
+                            <button class="reply-btn" onclick="openReplyPopup(${discussion.id})">Give Reply</button>
+                            <span class="view-replies-link" onclick="toggleReplies(${discussion.id})">View Replies</span>
+                        </div>
+                        <div class="replies-section" id="replies-${discussion.id}">${repliesHtml || "<p>No replies yet.</p>"}</div>
+                    </div>
+                `;
+            });
+        }
+        function toggleReplies(id) {
+            const repliesSection = document.getElementById(`replies-${id}`);
+            repliesSection.style.display = repliesSection.style.display === 'none' ? 'block' : 'none';
+        }
+        async function submitQuestion() {
+            const userName = document.getElementById("userName").value.trim();
+            const topic = document.getElementById("topic").value.trim();
+            const questionText = document.getElementById("questionText").value.trim();
+            if (!userName || !topic || !questionText) { alert("Please fill in all fields."); return; }
+            const response = await fetch("submit_question.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userName, topic, questionText })
+            });
+            if (response.ok) { alert("Question submitted successfully!"); closePopup(); fetchDiscussions(); } 
+            else { alert("Failed to submit question."); }
+        }
+        async function submitReply() {
+            const replyUserName = document.getElementById("replyUserName").value;
+            const replyText = document.getElementById("replyText").value;
+            await fetch(`submit_reply.php?id=${currentQuestionId}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ replyUserName, replyText })
+            });
+            closeReplyPopup();
+            fetchDiscussions();
+        }
+        fetchDiscussions();
+
+        // Feedback Form Logic
+        document.getElementById('feedback-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            try {
+                const response = await fetch('submit_feedback.php', { method: 'POST', body: formData });
+                const data = await response.json();
+                if (response.ok) { alert('Feedback submitted successfully!'); event.target.reset(); } 
+                else { alert(data.error || "Failed to submit feedback"); }
+            } catch (error) { console.error("Error:", error); alert("Server error. Please try again later."); }
+        });
+
+        // Footer Contact Form Logic
+        document.getElementById('footer-contact-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            try {
+                const response = await fetch('submit_contact.php', { method: 'POST', body: formData });
+                const data = await response.json();
+                if (response.ok) { alert('Message sent successfully!'); event.target.reset(); } 
+                else { alert(data.error || "Failed to send message"); }
+            } catch (error) { console.error("Error:", error); alert("Server error. Please try again later."); }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9254afff1e9e672b',t:'MTc0MjgwMzc3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
